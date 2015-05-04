@@ -1,0 +1,12 @@
+public class Viewer {
+    
+    public double setDate() {
+    }
+    public String setCompany(){
+    }
+    public String setProject(){
+    }
+    public String writeNote(){
+    }
+    
+}
