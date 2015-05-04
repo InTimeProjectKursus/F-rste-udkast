@@ -1,0 +1,18 @@
+public class Employee {
+    // Each employee has their own ID
+int employeeNumber;
+
+    // Handels if the employees has different payments  
+int employeePayment;
+
+    public double setEmployee(employeeNumber, employeePayment){
+    
+        }
+    
+    // Sorts the tables in the program by either date or project
+    public void sortBy(){
+        
+        }
+     
+    
+}
