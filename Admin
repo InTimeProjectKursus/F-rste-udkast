@@ -1,3 +1,18 @@
+import java.util.ArrayList;
+
 public class Admin extends Employee {
+    public ArrayList<Customer> customers = new ArrayList<Customer>();
+    
+    public Admin(String name){
+        super(name);
+    }
+    
+    public void createCustomer(String name){
+        ArrayList<Project> projects = new ArrayList<Project>();
+        // Needs to be added to a db
+        Customer c = new Customer(name, projects);
+        this.customers.add(c);
+    }
+    
     
 }
