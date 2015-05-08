@@ -1,18 +1,66 @@
-public class Employee {
-    // Each employee has their own ID
-int employeeNumber;
+import java.util.ArrayList;
+import java.util.Date;
 
-    // Handels if the employees has different payments  
-int employeePayment;
+public class Employee{
 
-    public double setEmployee(employeeNumber, employeePayment){
+    public String name;
+    public ArrayList<Time> times = new ArrayList<Time>();
     
+    public Employee(String name){
+        this.name = name;   
+    }
+    
+    public Customer chooseCustomer(String c_name, ArrayList<Customer> customers){
+        for (Customer c : customers){
+            if (c.name.equals(c_name)){
+                return c;
+            }
         }
+        return null;
+    }
+   
+    public Project chooseProject(String p_name, ArrayList<Customer> customers){
+        for(Customer c : customers){
+            ArrayList<Project> projects = c.projects;
+            for(Project p : projects){
+                if (p.name.equals(p_name)){
+                    return p;
+                }
+            }
+        }
+        return null;
+    }
     
-    // Sorts the tables in the program by either date or project
-    public void sortBy(){
+    public void createProject(String c_name,
+                              String p_name,
+                              ArrayList<Customer> customers){
+        Customer customer = new Customer();
+        for(Customer c : customers){
+            if (c.name.equals(c_name))
+               customer = c;
+        }
+        if (!customer.name.equals(null)){
+            customer.addProject(p_name);
+        }
+    }
+    
+    public void addTime(int hours, int minutes){
+        Time t = new Time(hours, minutes);
+        this.times.add(t);
+    }
+    
+    public void displayTimes(){
+        for (Time t : this.times){
+            if (t.minutes < 10){
+                System.out.println("Tid: " + t.hours + ":0" + t.minutes + ", Dato: " + t.date);
+            } else {
+                System.out.println("Tid: " + t.hours + ":" + t.minutes + ", Dato: " + t.date);
+            }
+        }
+    }
+    
+    
+    
         
-        }
      
-    
-}
+}   
