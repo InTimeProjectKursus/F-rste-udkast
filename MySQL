@@ -1,0 +1,107 @@
+DROP DATABASE inCon;
+CREATE DATABASE inCon;
+USE inCon;
+
+/********** kunne være inCon's database **********/
+CREATE TABLE employees(
+  eid MEDIUMINT NOT NULL AUTO_INCREMENT,
+  name varchar(255),
+  PRIMARY KEY (eid)
+);
+
+CREATE TABLE projects(
+  pid MEDIUMINT NOT NULL AUTO_INCREMENT,
+  name varchar(255),
+  PRIMARY KEY (pid)
+);
+
+CREATE TABLE costumer(
+  cid MEDIUMINT NOT NULL AUTO_INCREMENT,
+  name varchar(255),
+  phone integer,
+  PRIMARY KEY (cid)
+);
+
+INSERT INTO employees VALUES (0, 'fnan'),(0, 'tom'), (0,'mette');
+INSERT INTO costumer  VALUES (0, 'joachim', 20781940),(0, 'tommy', 45454234), (0,'vivien', 38383060);
+INSERT INTO projects  VALUES (0, 'gøre rent'),(0, 'se tv'), (0,'kod SML!');
+
+/*********** snedigt sql ***********/
+
+CREATE TABLE tasks(
+  tid MEDIUMINT NOT NULL AUTO_INCREMENT,
+  starttime   DATETIME,
+  endtime     DATETIME,
+  elapsedtime integer,
+  employee integer,
+  project  integer,
+  PRIMARY KEY (tid)
+);
+
+/* instiller tiden når man opretter en task */
+CREATE TRIGGER start BEFORE INSERT ON tasks
+FOR EACH ROW
+SET NEW.starttime = SYSDATE();
+
+/* instiller tiden når man stopper en task */
+DELIMITER $$
+CREATE TRIGGER end BEFORE UPDATE ON tasks
+FOR EACH ROW
+BEGIN
+  SET NEW.endtime = SYSDATE();
+  SET NEW.elapsedtime = TIME_TO_SEC(NEW.endtime) - TIME_TO_SEC(OLD.starttime);
+END
+$$
+DELIMITER ;
+
+/* Starter en task, med et eip, og et pid.
+ * Returnerer et tid (der senere skal stoppes)
+ */
+
+DELIMITER $$
+CREATE PROCEDURE startTask(
+  IN  employeeId integer,
+  IN  projectId  integer,
+  OUT thisID MEDIUMINT
+)
+BEGIN
+  INSERT INTO tasks
+  VALUES
+    (0,NULL,NULL,0,employeeId,projectId);
+  SELECT MAX(tid) INTO thisID FROM tasks;
+END
+$$
+DELIMITER ;
+
+
+/* stopper en task */
+DELIMITER $$
+CREATE PROCEDURE stopTask(
+  IN thisTid MEDIUMINT
+)
+BEGIN
+  UPDATE tasks SET endtime = 0 WHERE tid = thisTid;
+END
+$$
+DELIMITER ;
+
+/* eksempler */
+CALL startTask(1, 2, @fnansTid);
+CALL startTask(2, 3, @tomsTid1);
+CALL startTask(2, 2, @tomsTid2);
+CALL startTask(3, 1, @mettesTid);
+CALL stopTask(1);
+CALL stopTask(2);/* vælg et tid fra en variabel */
+CALL stopTask(3);
+CALL stopTask(@mettesTid);
+
+/* til faktura eksempel */
+
+SELECT e.name AS employee, p.name AS project, elapsedtime AS 'elapsed time' FROM employees AS e, projects AS p, tasks AS t
+WHERE e.eid = t.employee AND p.pid = t.project;
+
+
+SELECT SUM(elapsedtime) INTO @timeSpentWatchingTv FROM employees AS e, projects AS p, tasks AS t
+WHERE e.eid = t.employee AND p.pid = t.project AND p.name = 'se tv';
+
+SELECT @timeSpentWatchingTv;
