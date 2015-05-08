@@ -1,0 +1,20 @@
+import java.util.ArrayList;
+
+public class Customer {
+    public String name;
+    public ArrayList<Project> projects;
+    
+    public Customer(String name, ArrayList<Project> projects){
+        this.name = name;
+        this.projects = projects;
+    }
+    public Customer(){
+        this.name = null;
+    }
+    public void addProject(String name){
+        Project newProject = new Project(name);
+        this.projects.add(newProject);
+    }
+    
+ 
+}
