@@ -1,0 +1,15 @@
+import java.util.Date;
+
+public class Time {
+    public int hours;
+    public int minutes;
+    public Date date;
+    
+    public Time(int h, int m){
+        this.hours = h;
+        this.minutes = m;
+        this.date = new Date();
+    }
+    
+
+}
