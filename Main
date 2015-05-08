@@ -1,10 +1,39 @@
+import java.sql.*;
+import java.util.ArrayList;
+
 public class Main {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Project p_1 = new Project("A");
+        Project p_2 = new Project("B");
+        Project p_3 = new Project("C");
+        
+        ArrayList<Project> projects = new ArrayList();
+        projects.add(p_1);
+        projects.add(p_2);
+        projects.add(p_3);
+        
+        Customer c_1 = new Customer("Kirk", projects);
+        ArrayList<Customer> c_list = new ArrayList();
+        c_list.add(c_1);
+        Employee Max = new Employee("Max");
+        
+        System.out.println(Max.chooseCustomer("Kirk", c_list));
+        
+        Max.addTime(1, 4);
+        Max.displayTimes();
+        
+        Connection myConnection = null;
+	try {
+		Class.forName("org.sqlite.JDBC");
+		myConnection = DriverManager.getConnection("jdbc:sqlite:Test.db");
+	} catch ( Exception e ) {
+		System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+		System.exit(0);
+		}
+
     }
-    
 }
