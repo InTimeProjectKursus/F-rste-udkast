@@ -9,6 +9,7 @@ public class Employee{
     public Employee(String name){
         this.name = name;   
     }
+    // Chooses a customer in the list of customers
     
     public Customer chooseCustomer(String c_name, ArrayList<Customer> customers){
         for (Customer c : customers){
@@ -19,6 +20,7 @@ public class Employee{
         return null;
     }
    
+   // Chooses a project in the list of all the choosen customers projects.
     public Project chooseProject(String p_name, ArrayList<Customer> customers){
         for(Customer c : customers){
             ArrayList<Project> projects = c.projects;
@@ -31,6 +33,7 @@ public class Employee{
         return null;
     }
     
+    // Creates a new project for at particular customer.
     public void createProject(String c_name,
                               String p_name,
                               ArrayList<Customer> customers){
@@ -43,12 +46,13 @@ public class Employee{
             customer.addProject(p_name);
         }
     }
-    
+    // Adds time to the project
     public void addTime(int hours, int minutes){
         Time t = new Time(hours, minutes);
         this.times.add(t);
     }
     
+    // Displays time spent on a project
     public void displayTimes(){
         for (Time t : this.times){
             if (t.minutes < 10){
