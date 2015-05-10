@@ -7,6 +7,7 @@ public class Admin extends Employee {
         super(name);
     }
     
+    // Creates a new customer in the database.
     public void createCustomer(String name){
         ArrayList<Project> projects = new ArrayList<Project>();
         // Needs to be added to a db
