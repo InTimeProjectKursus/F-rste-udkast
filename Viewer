@@ -1,12 +1,99 @@
-public class Viewer {
-    
-    public double setDate() {
-    }
-    public String setCompany(){
-    }
-    public String setProject(){
-    }
-    public String writeNote(){
-    }
-    
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+
+public class clientRegistration {
+
+	// main metode.
+	public static void main(String[] args) {
+
+		// definerer JFrame og størrelse på rammen.
+		JFrame frame = new JFrame("Kunde Registrering");
+		frame.setSize(640, 480);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		JPanel panel = new JPanel();
+		frame.add(panel);
+		placeComponents(panel);
+
+		frame.setVisible(true);
+	}
+
+	    // Instantierer Labels, Tekstfelter og knapper.
+	    
+	        private static void placeComponents(JPanel panel) {
+            panel.setLayout(null);
+
+		// Nyt Label
+		
+		JLabel userLabel = new JLabel("Udført Af:");
+		userLabel.setBounds(10, 10, 100, 25);
+		panel.add(userLabel);
+
+		// Nyt Tekstfelt.
+		JTextField userText = new JTextField(20);
+		userText.setBounds(110, 10, 160, 25);
+		panel.add(userText);
+
+		// Nyt Label
+		JLabel clientLabel = new JLabel("Kunde Navn:");
+		clientLabel.setBounds(10, 40, 100, 25);
+		panel.add(clientLabel);
+
+		// Nyt Tekstfelt.
+		JTextField clientName = new JTextField(20);
+		clientName.setBounds(110, 40, 160, 25);
+		panel.add(clientName);
+
+		// Nyt Label
+		JLabel startDateLabel = new JLabel("Start Dato:");
+		startDateLabel.setBounds(10, 70, 100, 25);
+		panel.add(startDateLabel);
+
+		/* Nyt Tekstfelt. JTextField er ikke ideel til dato brug men der
+		   er mange andre og langt bedre alternativer */
+		JTextField startDateField = new JTextField(20);
+		startDateField.setBounds(110, 70, 160, 25);
+		panel.add(startDateField);
+
+		// Nyt Label
+		JLabel finishDateLabel = new JLabel("Slut Dato:");
+		finishDateLabel.setBounds(10, 100, 100, 25);
+		panel.add(finishDateLabel);
+
+		/* Nyt Tekstfelt. JTextField er ikke ideel til dato brug men der
+		   er mange andre og langt bedre alternativer */
+		   
+		JTextField finishDateField = new JTextField(20);
+		finishDateField.setBounds(110, 100, 160, 25);
+		panel.add(finishDateField);
+
+		// Nyt Label
+		JLabel reportLabel = new JLabel("Detaljer:");
+		reportLabel.setBounds(10, 130, 100, 25);
+		panel.add(reportLabel);
+
+		/* Nyt Tekstfelt, skal nok udskiftes med JTextArea i stedet for JTextField
+		   for at kunne skrive på flere linjer.*/
+		   
+		JTextField reportField = new JTextField(20);
+		reportField.setBounds(110, 130, 160, 200);
+		panel.add(reportField);
+
+		/* opretter en knap som med lidt mere kodning skal føre til et nyt view eller
+		   vad man nu vil bruge knappen til. */
+		   
+		JButton submitButton = new JButton("Udfør");
+		submitButton.setBounds(190, 350, 80, 25);
+		panel.add(submitButton);
+	}
+
 }
+
+
+
+
