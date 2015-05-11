@@ -4,6 +4,8 @@ import java.util.ArrayList;
 public class Main {
 
     /**
+     * Tests to see if the functions for Customer works, it must be able to hold
+     * both the firm name and a project with a name. 
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -25,6 +27,10 @@ public class Main {
         
         Max.addTime(1, 4);
         Max.displayTimes();
+        
+        /**
+         * Connects the database with java.
+         */
         
         Connection myConnection = null;
 	try {
