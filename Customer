@@ -11,7 +11,7 @@ public class Customer {
     public Customer(){
         this.name = null;
     }
-    // Adds a project to a customer
+    // Adds a project to a customer 
     public void addProject(String name){
         Project newProject = new Project(name);
         this.projects.add(newProject);
